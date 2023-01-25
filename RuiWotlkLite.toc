@@ -1,0 +1,8 @@
+## Interface: 30401
+## Title: |cff00ff00R|r|cffff6060ui|r|cff009cffWotlkLite|r
+## Author: xHoaxDreamx
+## Version: 1.3.0.4
+## Notes: Lightweight modification of blizzardUI
+
+## Modules
+Modules\_init.xml
