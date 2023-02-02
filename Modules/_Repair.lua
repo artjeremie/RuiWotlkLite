@@ -17,7 +17,6 @@ g:SetScript("OnEvent", function()
                     return
                 end
             end
-
             if money > cost then
                 RepairAllItems()
                 print('|cffff6060Repairing all items for|r ' .. GetCoinTextureString(cost))

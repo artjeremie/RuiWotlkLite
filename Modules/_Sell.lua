@@ -9,7 +9,6 @@ g:SetScript("OnEvent", function()
                 _, _, itemRarity, _, _, _, _, _, _, _, itemSellPrice = GetItemInfo(CurrentItemLink)
                 MyContainerItemInfo = C_Container.GetContainerItemInfo(bags, slots)
                 itemCount = MyContainerItemInfo.stackCount
-
                 if itemRarity == 0 and itemSellPrice ~= 0 then
                     totalPrice = totalPrice + (itemSellPrice * itemCount)
                     C_Container.UseContainerItem(bags, slots)
@@ -17,7 +16,6 @@ g:SetScript("OnEvent", function()
             end
         end
     end
-
     if totalPrice ~= 0 then
         print("|cffFFC125Sold all items for:|r " .. GetCoinTextureString(totalPrice))
     else

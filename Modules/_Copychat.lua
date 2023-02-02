@@ -1,12 +1,14 @@
 local concat = table.concat
-local container = CreateFrame("Frame", "CopyFrame", UIParent, "BackdropTemplate")
+local container = CreateFrame("Frame", "CopyFrame", UIParent,
+    "BackdropTemplate")
 container:SetSize(540, 300)
 container:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 container:SetFrameStrata("DIALOG")
 container:SetBackdrop({
     bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
     edgeSize = 16,
-    tile = true, tileSize = 16,
+    tile = true,
+    tileSize = 16,
     insets = { left = 3, right = 3, top = 3, bottom = 3 }
 })
 container:SetBackdropColor(0, 0, 0)
@@ -19,7 +21,8 @@ title:SetTextColor(1, 1, 0)
 title:SetShadowOffset(1, -1)
 title:SetJustifyH("LEFT")
 
-local closeButton = CreateFrame("Button", nil, container, "UIPanelCloseButton")
+local closeButton = CreateFrame("Button", nil, container,
+    "UIPanelCloseButton")
 closeButton:SetPoint("TOPRIGHT", 0, -1)
 
 local copyBox = CreateFrame("EditBox", nil, container)
@@ -30,13 +33,16 @@ copyBox:SetScript("OnEscapePressed", function()
     container:Hide()
 end)
 
-local scroll = CreateFrame("ScrollFrame", nil, container, "UIPanelScrollFrameTemplate")
+local scroll = CreateFrame("ScrollFrame", nil, container,
+    "UIPanelScrollFrameTemplate")
 scroll:SetPoint("TOPLEFT", 8, -30)
 scroll:SetPoint("BOTTOMRIGHT", -30, 8)
 scroll:SetScrollChild(copyBox)
 
 scroll.ScrollBar:SetScript("OnMinMaxChanged", function(self, _, max)
-    C_Timer.After(2, function() self:SetValue(max) end)
+    C_Timer.After(2, function()
+        self:SetValue(max)
+    end)
 end)
 
 local function GetChatLines(chat)
@@ -44,7 +50,6 @@ local function GetChatLines(chat)
     for message = 1, chat:GetNumMessages() do
         lines[message] = chat:GetMessageInfo(message)
     end
-
     return lines
 end
 
@@ -54,7 +59,6 @@ local function CopyChat(chat)
         local width, height = container:GetSize()
         copyBox:SetSize(width - 38, height - 38)
         scroll:UpdateScrollChildRect()
-
         title:SetText(chat.name)
 
         local f1, f2, f3 = chat:GetFont()
@@ -71,16 +75,14 @@ local function CreateCopyButton(self)
     self.Copy = CreateFrame("Button", nil, self)
     self.Copy:SetSize(20, 20)
     self.Copy:SetPoint("BOTTOMRIGHT", self, 0, -5)
-
     self.Copy:SetNormalTexture("Interface\\AddOns\\RuiWotlkLite\\Media\\Chat\\copynormal")
     self.Copy:GetNormalTexture():SetSize(20, 20)
-
     self.Copy:SetHighlightTexture("Interface\\AddOns\\RuiWotlkLite\\Media\\Chat\\copyhighlight")
     self.Copy:GetHighlightTexture():SetAllPoints(self.Copy:GetNormalTexture())
 
-    local tab = _G[self:GetName().."Tab"]
+    local tab = _G[self:GetName() .. "Tab"]
     hooksecurefunc(tab, "SetAlpha", function()
-        self.Copy:SetAlpha(tab:GetAlpha()*0.55)
+        self.Copy:SetAlpha(tab:GetAlpha() * 0.55)
     end)
 
     self.Copy:SetScript("OnMouseDown", function(self)

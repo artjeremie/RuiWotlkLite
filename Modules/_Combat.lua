@@ -5,7 +5,6 @@ local Indicator = {}
 
 local function InCombat(unit)
     local _, _, class = UnitClass(unit)
-
     if UnitAffectingCombat(unit) then
         return true
     else
@@ -19,7 +18,6 @@ local function InCombat(unit)
             end
         end
     end
-
     return false
 end
 
@@ -32,16 +30,15 @@ local events = {
 local function CreateCombatIndicatorForUnit(frame)
     if not Indicator[frame] then
         local ciFrame = frame:CreateTexture(nil, "BORDER")
-        ciFrame:SetPoint("LEFT", frame, "RIGHT", -28, 10)
+        ciFrame:SetPoint("LEFT", frame, "RIGHT", -22, 10)
         ciFrame:SetSize(30, 30)
         ciFrame:SetTexture("Interface\\Icons\\ABILITY_DUALWIELD")
         ciFrame:Hide()
         Indicator[frame] = ciFrame
-
         frame:RegisterEvent("UNIT_FLAGS")
         frame:HookScript("OnEvent", function(self, event)
             if events[event] and frame:IsShown() then
-                local unit = SecureButton_GetUnit(self) -- SecureButton_GetModifiedUnit?
+                local unit = SecureButton_GetUnit(self)
                 Indicator[self]:SetShown(InCombat(unit))
             end
         end)

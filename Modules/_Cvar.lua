@@ -6,7 +6,5 @@ wotlkcvar:HookScript("OnEvent", function()
     SetCVar("ShowClassColorInNameplate", 1)
     SetCVar("scriptErrors", 1)
     SetCVar("xpBarText", 1)
-    SetCVar("usemaxfps", 1)
 end)
-
 wotlkcvar:RegisterEvent("PLAYER_LOGIN")
